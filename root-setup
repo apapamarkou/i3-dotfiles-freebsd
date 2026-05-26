@@ -37,7 +37,9 @@ firefox python3 xclip autocutsel starship unzip vscode \
 calcurse py311-i3ipc doas qpwgraph maim \
 pipewire-module-xrdp-0.1 pipewire-spa-oss-g20251117_3 \
 inotify-tools zsh zsh-autosuggestions \
-zsh-completions zsh-fast-syntax-highlighting
+zsh-completions zsh-fast-syntax-highlighting \
+papirus-icon-theme materia-gtk-theme \
+ollama
 
 echo
 echo "Adding user to groups..."
@@ -80,6 +82,7 @@ sysrc wireplumber_enable="YES"
 sysrc pipewire_enable="YES"
 sysrc dhcpcd_enable="YES"
 sysrc dbus_enable="YES"
+sysrc ollama_enable=YES
 
 echo
 echo "Starting dhcpcd..."
