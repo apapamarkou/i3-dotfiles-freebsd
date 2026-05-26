@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wallpapers
+Exec=wallpapers
+NoDisplay=false
+Terminal=false
+Icon=preferences-desktop-wallpaper
+Categories=Settings;DesktopSettings;Graphics;
+Keywords=wallpaper;background;desktop;theme;

@@ -1,0 +1,60 @@
+configuration {
+    show-icons: false;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+}
+
+* {
+    background-color: #1a1b26; /* Dark theme */
+    text-color: #a9b1d6;
+    font: "Noto Color Emoji 34"; /* Large, clear icons */
+}
+
+window {
+    width: 750px;
+    height: 750px;
+    border: 2px;
+    border-radius:    8px;
+    border-color: #58a6ff;
+}
+
+/* HIDDEN INPUTBAR: We only tell Rofi to render the listview */
+mainbox {
+    children: [ listview ];
+    padding: 10px;
+}
+
+listview {
+    columns: 10;
+    lines: 10;
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+    fixed-columns: true;
+    fixed-height: true;
+    spacing: 8px;
+    padding: 10px;
+    scrollbar: false;
+}
+
+element {
+    /* Ensure the hit-box is large and square */
+    padding: 12px 0px; 
+    border-radius: 8px;
+    orientation: vertical;
+}
+
+element selected {
+    background-color: #414868;
+    text-color: #bb9af7;
+}
+
+element-text {
+    /* Force no dots and center everything */
+    expand: true;
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    ellipsize: none;
+    margin: 0px;
+    width: 60px;
+}

@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+# Check if any selection exists; if not, use the current file under cursor
+if [ -s "$NNN_SEL" ]; then
+    xargs -0 dotfiles-remove < "$NNN_SEL"
+else
+    dotfiles-remove "$1"
+fi

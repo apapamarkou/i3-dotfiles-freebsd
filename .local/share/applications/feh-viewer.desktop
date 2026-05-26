@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Feh Viewer Script
+Exec=feh-viewer %f
+MimeType=image/bmp;image/gif;image/jpeg;image/jpg;image/png;image/tiff;image/webp;
+NoDisplay=false
+Terminal=false

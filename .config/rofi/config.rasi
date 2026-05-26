@@ -1,0 +1,91 @@
+/** --- THEME RESET --- **/
+@theme "/dev/null"
+
+configuration {
+    font: "Inter 11";
+    show-icons: true;
+    icon-theme: "breeze-dark";
+    dmenu-intl: true;
+    display-drun: " ";
+    display-run: " ";
+    me-select-entry:    "";
+    me-accept-entry:    "MousePrimary";  
+    hover-select:       true;
+}
+
+/** --- GLOBAL VARIABLES --- **/
+* {
+    /* GitHub / Materia Dark Colors */
+    bg:      #0d1117;
+    fg:      #c9d1d9;
+    blue:    #58a6ff;
+    border:  #30363d;
+
+    background-color: @bg;
+    text-color:       @fg;
+}
+
+/** --- WINDOW DESIGN --- **/
+window {
+    width:            350px;
+    height:           600;
+    background-color: @bg;
+    border:           2px;
+    border-color:     @blue;
+    border-radius:    8px;
+    padding:          20px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 15px;
+}
+
+/** --- SEARCH BAR --- **/
+inputbar {
+    children: [ prompt, entry ];
+    padding: 5px;
+}
+
+prompt {
+    text-color: @blue;
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: #484f58;
+    text-color: @fg;
+}
+
+/** --- LIST VIEW --- **/
+listview {
+    columns: 1;
+    lines: 8;
+    spacing: 5px;
+    dynamic: true;
+    cycle: false;
+}
+
+/** --- INDIVIDUAL ITEMS --- **/
+element {
+    padding: 10px;
+    border-radius: 6px;
+}
+
+element-icon {
+    size:             24px;       /* Spacy icon size */
+    padding: 0px 10px 0px 0px;
+    background-color: transparent;
+}
+
+/* Ensure text inside elements behaves correctly */
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+    vertical-align: 0.5;
+}
+
+element selected {
+    background-color: @blue;
+    text-color:       #0d1117; /* Dark text on the blue bar */
+}

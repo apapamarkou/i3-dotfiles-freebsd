@@ -1,0 +1,2 @@
+. ~/.profile
+exec i3

@@ -1,0 +1,30 @@
+/** --- MICRO POWER MENU --- **/
+@import "config.rasi" /* Import your main colors */
+
+window {
+    width:            250px;    /* Much narrower */
+    height:           0px;    /* Short and sweet */
+    border:           2px;
+    border-color:     @blue;
+    location:         center;
+    anchor:           center;
+}
+
+mainbox {
+    children: [ listview ];
+}
+
+listview {
+    lines: 5;
+    fixed-height: false;
+    dynamic: true;
+    scrollbar: false;
+}
+
+element {
+    padding: 10px;
+}
+
+element-text {
+    horizontal-align: 0; /* Center the text for a "pill" look */
+}

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Path to the list we just generated
+EMOJI_FILE="$HOME/.config/rofi/emojis.txt"
+
+# Select emoji
+selected=$(cat "$EMOJI_FILE" | rofi -dmenu -theme ~/.config/rofi/emoji.rasi)
+
+# If something was selected, copy and paste
+if [ -n "$selected" ]; then
+    # For X11
+    echo -n "$selected" | xclip -selection clipboard
+    xdotool key ctrl+v
+    # For Wayland (Uncomment if needed)
+    # echo -n "$selected" | wl-copy && wtype "$selected"
+fi

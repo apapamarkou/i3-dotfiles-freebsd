@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+DOTFILES="$HOME/i3-dotfiles-freebsd"
+LIST="$DOTFILES/dotfile-paths"
+
+mkdir -p "$DOTFILES"
+touch "$LIST"
+
+for item in "$@"; do
+    abs="$(realpath "$item")"
+    rel="${abs#$HOME/}"
+
+    # avoid duplicates
+    grep -qxF "$rel" "$LIST" 2>/dev/null && {
+        notify-send "I3 Dotfiles" "\n Already tracked: $rel\n"
+        continue
+    }
+
+    target="$DOTFILES/$rel"
+    mkdir -p "$(dirname "$target")"
+
+    echo "$rel" >> "$LIST"
+
+    cp -a "$abs" "$target"
+
+    notify-send "I3 Dotfiles" "\n Added: $rel\n"
+done

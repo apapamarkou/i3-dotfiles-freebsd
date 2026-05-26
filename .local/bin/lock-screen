@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+IMG="/tmp/lock.png"
+
+# screenshot με maim
+maim "$IMG"
+
+# blur (ImageMagick)
+magick "$IMG" -blur 0x4 "$IMG"
+
+# lock με εικόνα
+i3lock -i "$IMG" -n -f

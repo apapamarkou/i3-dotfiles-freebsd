@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Function to ask for confirmation using Rofi
+confirm_exit() {
+    echo -e "Yes\nNo" | rofi -dmenu -i -p "Are you sure you want to $1?" -config ~/.config/rofi/confirm.rasi
+}
+
+
+case "$1" in
+    shutdown)
+        if [ "$(confirm_exit "Shutdown")" = "Yes" ]; then doas shutdown -p now; fi
+        ;;
+    reboot)
+        if [ "$(confirm_exit "Reboot")" = "Yes" ]; then doas shutdown -r now; fi
+        ;;
+    suspend)
+        # Usually, people don't confirm suspend, but you can add it here
+        systemctl suspend
+        ;;
+    logout)
+        if [ "$(confirm_exit "Logout")" = "Yes" ]; then i3-msg exit; fi
+        ;;
+    lock)
+        lock-screen
+        ;;
+esac

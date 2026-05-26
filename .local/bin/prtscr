@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
+VIDEO_DIR="$HOME/Videos/Screencasts"
+TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+
+mkdir -p "$SCREENSHOT_DIR" "$VIDEO_DIR"
+
+# Stop recording if running
+if pgrep -x "ffmpeg" > /dev/null; then
+    pkill -2 -x "ffmpeg"
+    notify-send "Recording Stopped" "Saved to $VIDEO_DIR"
+    exit 0
+fi
+
+case "$1" in
+    shot-full)
+        sleep 1 && maim "$SCREENSHOT_DIR/Shot_$TIMESTAMP.png"
+        notify-send "Screenshot Saved" "Full screen captured"
+        ;;
+    shot-window)
+        sleep 1 && maim -i $(xdotool getactivewindow) "$SCREENSHOT_DIR/Window_$TIMESTAMP.png"
+        notify-send "Screenshot Saved" "Window captured"
+        ;;
+    shot-sel)
+        maim -s "$SCREENSHOT_DIR/Select_$TIMESTAMP.png"
+        notify-send "Screenshot Saved" "Selection captured"
+        ;;
+    rec-full)
+        notify-send "Recording Started" "Full Screen + Audio"
+        ffmpeg -f x11grab -video_size $(xdpyinfo | grep dimensions | awk '{print $2}') \
+               -framerate 30 -i :0.0 -f pulse -i default -c:v libx264 -preset veryfast \
+               -crf 18 -pix_fmt yuv420p "$VIDEO_DIR/Rec_$TIMESTAMP.mp4" &
+        ;;
+    rec-window)
+        GEO=$(xdotool getwindowfocus getwindowgeometry --shell)
+        eval $GEO
+        notify-send "Recording Started" "Window + Audio"
+        ffmpeg -f x11grab -video_size ${WIDTH}x${HEIGHT} -i :0.0+${X},${Y} \
+               -f pulse -i default "$VIDEO_DIR/WinRec_$TIMESTAMP.mp4" &
+        ;;
+    rec-sel)
+        SEL=$(slop -f "%g")
+        SIZE=$(echo $SEL | cut -d+ -f1)
+        X=$(echo $SEL | cut -d+ -f2)
+        Y=$(echo $SEL | cut -d+ -f3)
+        notify-send "Recording Started" "Selection + Audio"
+        ffmpeg -f x11grab -s $SIZE -i :0.0+${X},${Y} \
+               -f pulse -i default "$VIDEO_DIR/AreaRec_$TIMESTAMP.mp4" &
+        ;;
+    stop)
+        # Already handled by the pgrep check above, but here for clarity
+        exit 0
+        ;;
+esac

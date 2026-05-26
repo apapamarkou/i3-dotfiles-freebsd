@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+
+# -------- CONFIG --------
+TERMINAL_CANDIDATES=(
+  "$TERMINAL"
+  xfce4-terminal
+  kitty
+  alacritty
+  xterm
+)
+
+# -------- FIND TERMINAL --------
+for term in "${TERMINAL_CANDIDATES[@]}"; do
+  if [[ -n "$term" ]] && command -v "$term" >/dev/null 2>&1; then
+    SELECTED="$term"
+    break
+  fi
+done
+
+if [[ -z "$SELECTED" ]]; then
+  echo "No supported terminal found"
+  exit 1
+fi
+
+# -------- DEFAULTS --------
+EXEC_CMD=""
+TITLE=""
+CLASS=""
+SIZE=""
+LOCK=0
+
+# -------- PARSE FLAGS --------
+while getopts ":e:t:c:s:lh" opt; do
+  case $opt in
+    e) EXEC_CMD="$OPTARG" ;;
+    t) TITLE="$OPTARG" ;;
+    c) CLASS="$OPTARG" ;;
+    s) SIZE="$OPTARG" ;; # format: COLSxROWS (e.g. 100x30)
+    l) LOCK=1 ;;
+    h)
+      echo "Usage: terminal [-e command] [-t title] [-c class] [-s COLSxROWS] [-l]"
+      exit 0
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG"
+      exit 1
+      ;;
+  esac
+done
+
+# -------- BUILD COMMAND --------
+case "$SELECTED" in
+  xfce4-terminal)
+    CMD=(xfce4-terminal --disable-server)
+    [[ -n "$TITLE" ]] && CMD+=(--title="$TITLE")
+    [[ -n "$CLASS" ]] && CMD+=(--class="$CLASS")
+    [[ -n "$SIZE" ]] && CMD+=(--geometry="$SIZE")
+    [[ -n "$EXEC_CMD" ]] && CMD+=(-e "$EXEC_CMD")
+    ;;
+
+  kitty)
+    CMD=(kitty)
+    [[ -n "$TITLE" ]] && CMD+=(--title "$TITLE")
+    [[ -n "$CLASS" ]] && CMD+=(--class "$CLASS")
+    [[ -n "$SIZE" ]] && CMD+=(--geometry "$SIZE")
+    [[ -n "$EXEC_CMD" ]] && CMD+=(-e bash -c "$EXEC_CMD")
+    ;;
+
+  alacritty)
+    CMD=(alacritty)
+    [[ -n "$TITLE" ]] && CMD+=(--title "$TITLE")
+    [[ -n "$CLASS" ]] && CMD+=(--class "$CLASS")
+  
+    if [[ -n "$SIZE" ]]; then
+      COLS=${SIZE%x*}
+      ROWS=${SIZE#*x}
+      CMD+=(-o "window.dimensions.columns=$COLS" "window.dimensions.lines=$ROWS")
+    fi
+  
+    [[ -n "$EXEC_CMD" ]] && CMD+=(-e bash -c "$EXEC_CMD")
+    ;;
+
+  xterm)
+    CMD=(xterm)
+    [[ -n "$TITLE" ]] && CMD+=(-T "$TITLE")
+    [[ -n "$CLASS" ]] && CMD+=(-class "$CLASS")
+    if [[ -n "$SIZE" ]]; then
+      COLS=${SIZE%x*}
+      ROWS=${SIZE#*x}
+      CMD+=(-geometry "${COLS}x${ROWS}")
+    fi
+    [[ -n "$EXEC_CMD" ]] && CMD+=(-e bash -c "$EXEC_CMD")
+    ;;
+
+  *)
+    echo "Unsupported terminal: $SELECTED"
+    exit 1
+    ;;
+esac
+
+# -------- LOCK --------
+if [[ $LOCK -eq 1 ]]; then
+  LOCK_KEY="${CLASS:-terminal}"
+  LOCK_FILE="/tmp/${LOCK_KEY}.lock"
+  (
+    flock -n 9 || exit 0
+    "${CMD[@]}"
+  ) 9>"$LOCK_FILE"
+else
+  exec "${CMD[@]}"
+fi

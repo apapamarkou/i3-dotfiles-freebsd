@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+options="📸 Shot Full\n🪟 Shot Window\n✂️ Shot Selection\n🎥 Record Full\n🎞️ Record Window\n🎯 Record Selection\n🛑 Stop Recording"
+
+chosen=$(echo -e "$options" | rofi -dmenu -i -p "Capture:")
+
+case "$chosen" in
+    "📸 Shot Full")      prtscr shot-full ;;
+    "🪟 Shot Window")    prtscr shot-window ;;
+    "✂️ Shot Selection")  prtscr shot-sel ;;
+    "🎥 Record Full")    prtscr rec-full ;;
+    "🎞️ Record Window")  prtscr rec-window ;;
+    "🎯 Record Selection") prtscr rec-sel ;;
+    "🛑 Stop Recording")  prtscr stop ;;
+esac

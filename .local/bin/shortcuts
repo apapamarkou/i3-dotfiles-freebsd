@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# Define ANSI Color Codes
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+GRAY='\033[0;37m'
+RESET='\033[0m'
+
+# Determine the config path
+CONFIG_FILE="$HOME/.config/i3/config"
+[ ! -f "$CONFIG_FILE" ] && CONFIG_FILE="$HOME/.i3/config"
+
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo -e "${YELLOW}Error:${RESET} i3 config file not found."
+    exit 1
+fi
+
+{
+    # Headers in Yellow
+    echo -e "${YELLOW}KEYBINDING\tCOMMAND${RESET}"
+    echo -e "${YELLOW}----------\t-------${RESET}"
+
+    # AWK handles the state (ignoring modes) and the coloring
+    awk -v cyan="$CYAN" -v gray="$GRAY" -v yellow="$YELLOW" -v reset="$RESET" '
+    # If we find a line starting with "mode", stop processing until we hit "}"
+    /^[[:space:]]*mode / { 
+        skip = 1; 
+        next; 
+    }
+    
+    # If we find a closing brace at the start of a line, stop skipping
+    /^[[:space:]]*\}/ { 
+        skip = 0; 
+        next; 
+    }
+
+    # If we are NOT skipping, and the line is a binding...
+    !skip && /^[[:space:]]*bind(sym|code)/ {
+        # Clean up the i3 keywords
+        gsub(/^[[:space:]]*bind(sym|code)[[:space:]]+(--no-startup-id[[:space:]]+)?/, "");
+        
+        # Isolate the key (first field) and the command (rest of the line)
+        match($0, /[^[:space:]]+/);
+        key = substr($0, RSTART, RLENGTH);
+        cmd = substr($0, RSTART + RLENGTH);
+        
+        # Trim leading space from command
+        gsub(/^[[:space:]]+/, "", cmd);
+        
+        # Print colorized output
+        print cyan key reset "\t" gray cmd reset
+    }
+    ' "$CONFIG_FILE"
+
+} | column -t -s $'\t' | ${PAGER:-less -R}

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+DOTFILES="$HOME/i3-dotfiles-freebsd"
+LIST="$DOTFILES/dotfile-paths"
+
+while read -r rel; do
+    [ -z "$rel" ] && continue
+
+    src="$HOME/$rel"
+    dst="$DOTFILES/$rel"
+
+    if [ ! -e "$src" ]; then
+        echo "Missing: $rel"
+        continue
+    fi
+
+    if [ -d "$src" ]; then
+        mkdir -p "$dst"
+        rsync -a --delete "$src/" "$dst/"
+    else
+        mkdir -p "$(dirname "$dst")"
+        rsync -a "$src" "$dst"
+    fi
+
+    echo "Synced: $rel"
+done < "$LIST"

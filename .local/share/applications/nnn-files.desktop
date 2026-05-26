@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=NNN File Manager
+Exec=nnn %f
+NoDisplay=false
+Terminal=true
+Icon=folder
+Categories=System;Core;FileTools;FileManager;
+Keywords=file manager;explorer;finder;browser;folders;directory;directories;partitions;drives;network;devices;rename;move;copy;delete;permissions;home;trash;

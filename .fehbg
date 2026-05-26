@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill '/home/user/Pictures/Wallpapers/84288a26-3628-43da-9c63-9f2181074721.jpg' 

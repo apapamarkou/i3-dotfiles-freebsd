@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+WP_DIR="$HOME/Pictures/Wallpapers"
+SAVE_SCRIPT="$HOME/.config/i3/wallpaper.sh"
+
+# The Action: 
+# 1. Generates Hex color
+# 2. Calls your change-accent-color script
+# 3. Sets the wallpaper and updates the save script
+ACTION="feh --bg-fill '%f' && \
+        notify-send 'Wallpaper Viewer' \"The image is saved as wallpaper\""
+
+feh --geometry 640x400 \
+    --auto-zoom \
+    --scale-down \
+    --image-bg "#000000" \
+    --bg-color "#000000" \
+    --class "Wallpapers" \
+    --font "Inter/12" \
+    --info "echo 'ENTER: Set as wallpaper | ARROWS: Browse | Q or ESC: Quit'" \
+    --action "$ACTION" \
+    "$WP_DIR"
