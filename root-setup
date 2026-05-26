@@ -90,5 +90,10 @@ echo "Starting dhcpcd..."
 service dhcpcd start || true
 
 echo
+echo "Starting ollama..."
+
+service ollama start
+
+echo
 echo "Root setup complete."
 echo "Now login as $TARGET_USER and run user-setup.sh"
