@@ -1,0 +1,91 @@
+#!/bin/sh
+
+set -e
+
+echo "=== FreeBSD Root Setup ==="
+
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Run this script as root."
+    exit 1
+fi
+
+printf "Enter target username: "
+read TARGET_USER
+
+if ! id "$TARGET_USER" >/dev/null 2>&1; then
+    echo "User '$TARGET_USER' does not exist."
+    exit 1
+fi
+
+echo
+echo "Updating package repository..."
+pkg update
+
+echo
+echo "Upgrading installed packages..."
+pkg upgrade -y
+
+echo
+echo "Installing packages..."
+
+pkg install -y \
+sudo fzf htop flock ImageMagick7 dejavu noto-basic noto-emoji \
+i3 i3lock i3status dmenu rofi polybar dunst feh arandr xterm \
+bash git curl wget neovim micro ncdu nnn figlet \
+xf86-video-vesa xorg alacritty lxappearance gtk3 dhcpcd \
+firefox python3 xclip autocutsel starship unzip vscode \
+calcurse py39-i3ipc doas qpwgraph maim \
+pipewire-module-xrdp-0.1 pipewire-spa-oss-g20251117_3 \
+inotify-tools zsh zsh-autosuggestions \
+zsh-completions zsh-fast-syntax-highlighting
+
+echo
+echo "Adding user to groups..."
+
+pw groupmod wheel -m "$TARGET_USER"
+pw groupmod video -m "$TARGET_USER"
+
+echo
+echo "Configuring doas..."
+
+DOAS_FILE="/usr/local/etc/doas.conf"
+
+touch "$DOAS_FILE"
+
+grep -qxF 'permit nopass :wheel cmd shutdown' "$DOAS_FILE" || \
+echo 'permit nopass :wheel cmd shutdown' >> "$DOAS_FILE"
+
+grep -qxF 'permit nopass :wheel cmd reboot' "$DOAS_FILE" || \
+echo 'permit nopass :wheel cmd reboot' >> "$DOAS_FILE"
+
+echo
+echo "Configuring sudo wheel group..."
+
+cp /usr/local/etc/sudoers /usr/local/etc/sudoers.bak
+
+sed -i '' \
+'s/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' \
+/usr/local/etc/sudoers
+
+echo
+echo "Configuring loader.conf..."
+
+grep -qxF 'kern.vty=vt' /boot/loader.conf || \
+echo 'kern.vty=vt' >> /boot/loader.conf
+
+echo
+echo "Enabling services..."
+
+sysrc wireplumber_enable="YES"
+sysrc pipewire_enable="YES"
+sysrc dhcpcd_enable="YES"
+sysrc dbus_enable="YES"
+
+echo
+echo "Starting dhcpcd..."
+
+service dhcpcd start || true
+
+echo
+echo "Root setup complete."
+echo "Now login as $TARGET_USER and run user-setup.sh"

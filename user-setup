@@ -1,0 +1,90 @@
+#!/bin/sh
+
+set -e
+
+echo "=== FreeBSD User Setup ==="
+
+if [ "$(id -u)" -eq 0 ]; then
+    echo "Do NOT run this script as root."
+    exit 1
+fi
+
+echo
+echo "Creating font directory..."
+
+mkdir -p "$HOME/.local/share/fonts"
+
+echo
+echo "Installing JetBrainsMono Nerd Font..."
+
+curl -L \
+-o /tmp/JetBrainsMono.zip \
+https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
+
+unzip -o \
+/tmp/JetBrainsMono.zip \
+-d "$HOME/.local/share/fonts"
+
+rm -f /tmp/JetBrainsMono.zip
+
+echo
+echo "Creating ~/.xinitrc ..."
+
+cat > "$HOME/.xinitrc" <<EOF
+. ~/.profile
+exec i3
+EOF
+
+echo
+echo "Changing shell to zsh..."
+
+chsh -s /usr/local/bin/zsh
+
+echo
+echo "Installing lazy-weather..."
+
+curl -sSL \
+https://raw.githubusercontent.com/apapamarkou/lazy-weather/main/install | bash
+
+echo
+echo "Copying dotfiles..."
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+find "$SCRIPT_DIR" -mindepth 1 -maxdepth 1 \
+! -name "TODO" \
+! -name "install" \
+! -name "dotfile-paths" \
+! -name ".git" \
+! -name "doc" \
+! -name "post-install-scripts" \
+! -name "$(basename "$0")" \
+-exec cp -R {} "$HOME/" \;
+
+echo
+echo "Running post-install scripts..."
+
+POST_DIR="$SCRIPT_DIR/post-install-scripts"
+
+if [ -d "$POST_DIR" ]; then
+    find "$POST_DIR" -type f -name "*.sh" | while read script; do
+        echo "Running $script"
+        chmod +x "$script"
+        sh "$script"
+    done
+fi
+
+echo
+echo "Setup complete."
+
+printf "Reboot now? [y/N]: "
+read ANSWER
+
+case "$ANSWER" in
+    y|Y)
+        doas reboot
+        ;;
+    *)
+        echo "You can reboot later."
+        ;;
+esac

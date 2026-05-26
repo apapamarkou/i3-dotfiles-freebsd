@@ -1,5 +1,7 @@
 # Post Install notes
 
+## run as root
+
 update system
 ```sh
 pkg update
@@ -12,7 +14,7 @@ pkg upgrade
 
 Install required packages
 ```sh
-pkg install sudo fzf htop flock ImageMagick7 dejavu noto-basic noto-emoji i3 i3lock i3status dmenu rofi polybar dunst feh arandr xterm bash git curl wget neovim micro ncdu nnn figlet xf86-video-vesa xorg alacritty lxappearance gtk3 dhcpcd firefox python3 xclip autocutsel starship unzip vscode calcurse py39-i3ipc doas qpwgraph maim papirus-icon-theme materia-gtk-theme adwaita-icon-theme gtk-murrine-engine 
+pkg install sudo fzf htop flock ImageMagick7 dejavu noto-basic noto-emoji i3 i3lock i3status dmenu rofi polybar dunst feh arandr xterm bash git curl wget neovim micro ncdu nnn figlet xf86-video-vesa xorg alacritty lxappearance gtk3 dhcpcd firefox python3 xclip autocutsel starship unzip vscode calcurse py39-i3ipc doas qpwgraph maim pipewire-module-xrdp-0.1 pipewire-spa-oss-g20251117_3 inotify-tools zsh zsh-autosuggestions zsh-completions zsh-fast-syntax-highlighting
 ```
 
 visudo and uncomment line
@@ -20,10 +22,10 @@ visudo and uncomment line
 # %wheel ALL=(ALL:ALL) ALL
 ```
 
-add user to correct groups
+add $USER_NAME to correct groups
 ```sh
-pw groupmod wheel -m user
-pw groupmod video -m user
+pw groupmod wheel -m $USER_NAME
+pw groupmod video -m $USER_NAME
 ```
 
 add to /usr/local/etc/doas.conf
@@ -32,22 +34,9 @@ permit nopass :wheel cmd shutdown
 permit nopass :wheel cmd reboot
 ```
 
-Change shell to bash
-```sh
-chsh -s /usr/local/bin/bash
-```
-
 add to /boot/loader.conf
 ```content
 kern.vty=vt
-```
-
-Download nerd font and unzip in ~/.local/share/fonts
-```bash
-mkdir -p ~/.local/share/fonts && \
-curl -L -o /tmp/JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip && \
-unzip -o /tmp/JetBrainsMono.zip -d ~/.local/share/fonts && \
-rm /tmp/JetBrainsMono.zip
 ```
 
 sysrc wireplumber_enable="YES"
@@ -57,13 +46,26 @@ sysrc dbus_enable="YES"
 
 service dhcpcd start
 
+## Run as user
 
-## User Actions
+Download nerd font and unzip in ~/.local/share/fonts
+```bash
+mkdir -p ~/.local/share/fonts && \
+curl -L -o /tmp/JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip && \
+unzip -o /tmp/JetBrainsMono.zip -d ~/.local/share/fonts && \
+rm /tmp/JetBrainsMono.zip
+```
 
 make ~/.xinitrc with:
-```content
+ls -la
+ls```content
 . ~/.profile
 exec i3
+```
+
+Change shell to bash
+```sh
+chsh -s /usr/local/bin/zsh
 ```
 
 Install weather app
@@ -71,5 +73,15 @@ Install weather app
 curl -sSL https://raw.githubusercontent.com/apapamarkou/lazy-weather/main/install | bash
 ```
 
+copy contents of ./ to /$HOME/ except:
+- ./TODO
+- ./install
+- ./dotfile-paths
+- ./.git
+- ./doc/
+- ./post-install-scripts/
 
+run all scripts in ./post-install-scripts/
+
+confirm and then reboot or just exit
 
