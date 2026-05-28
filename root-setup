@@ -28,6 +28,8 @@ pkg upgrade -y
 echo
 echo "Installing packages..."
 
+
+
 pkg install -y \
 sudo fzf htop rsync flock ImageMagick7 dejavu noto-basic noto-emoji \
 i3 i3lock i3status dmenu rofi polybar dunst feh arandr xterm \
@@ -39,7 +41,7 @@ pipewire wireplumber pipewire-module-xrdp-0.1 pipewire-spa-oss-g20251117_3 \
 inotify-tools zsh zsh-autosuggestions \
 zsh-completions zsh-fast-syntax-highlighting \
 papirus-icon-theme materia-gtk-theme \
-ollama python kdenlive krita gimp ardour okular wine cabextract \
+ollama python kdenlive krita gimp ardour okular libreoffice wine cabextract \
 cups gutenprint hplip
 
 /usr/local/share/wine/pkg32.sh --old install -r FreeBSD-ports wine mesa-dri
