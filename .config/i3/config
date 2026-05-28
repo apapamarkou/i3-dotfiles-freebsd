@@ -114,10 +114,8 @@ bindsym $mod+Shift+Return exec $file_manager
 bindsym $mod+d exec --no-startup-id $app_launcher
 bindsym $mod+e exec --no-startup-id $emoji_picker
 bindsym $mod+h exec $display_help
-# bindsym $mod+x exec --no-startup-id rofi-power
+bindsym $mod+c exec terminal -c BsdConfWindow -l -s 100x30 -e 'sudo bsdconfig'
 # bindsym Print exec --no-startup-id rofi-grab
-
-
 
 
 ####################################
@@ -297,7 +295,7 @@ for_window [class="Lxappearance"] floating enable, border pixel 2, resize set 70
 for_window [class="Gnome-abrt"] floating enable, border pixel 2, resize set 900 700, move position center
 for_window [class="Lightdm-gtk-greeter-settings"] floating enable, border pixel 2, resize set 900 700, move position center
 for_window [class="qpwgraph"] floating enable, border pixel 2, resize set 1900 1000, move position center
-for_window [class="Nm-connection-editor"] floating enable, border pixel 2, resize set 400 400, move position center
+for_window [class="NetConfWindow"] floating enable, move position center
 for_window [class="Eww"] floating enable
 for_window [class="pavucontrol"] floating enable, border pixel 2, resize set 600 600, move position center
 for_window [class="Xfce4-clipman-history"] floating enable, border pixel 2, resize set 600 700, move position center
@@ -306,7 +304,5 @@ for_window [class="PulseMixer"] floating enable, move position center
 for_window [title="TopWindow"] floating enable,move position center
 for_window [class="CalcurseWindow"] floating enable, move position center
 for_window [class="weatherWindow"] floating enable, move position center
-
-
-
-
+for_window [class="NcduWindow"] floating enable, move position center
+for_window [class="BsdConfWindow"] floating enable, move position center

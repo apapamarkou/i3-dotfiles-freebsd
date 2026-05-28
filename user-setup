@@ -27,6 +27,14 @@ unzip -o \
 
 rm -f /tmp/JetBrainsMono.zip
 
+git clone --depth 1 https://github.com/rsms/inter.git
+mkdir -p ~/.local/share/fonts
+cp inter/docs/font-files/*.ttf ~/.local/share/fonts/
+rm -rf inter/
+
+fc-cache -f -v
+
+
 echo
 echo "Creating ~/.xinitrc ..."
 

@@ -27,7 +27,7 @@ echo -e "${GREEN}╭────────────────────
 
 # 👤 User / Host
 printf "${GREEN}│${YELLOW}  User: ${RESET}%s\n" "$(whoami)"
-printf "${GREEN}│${YELLOW}  Host: ${RESET}%s\n" "$(cat /etc/hostname)"
+printf "${GREEN}│${YELLOW}  Host: ${RESET}%s\n" "$(hostname)"
 
 # 🧠 Memory
 if command -v free >/dev/null 2>&1; then
@@ -54,7 +54,7 @@ if command -v df >/dev/null 2>&1; then
 fi
 
 # Uptime
-printf "${GREEN}│${YELLOW}  Uptime: ${RESET}%s\n" "$(uptime -p | sed 's/up //')"
+printf "${GREEN}│${YELLOW}  Uptime: ${RESET}%s\n" "$(uptime)"
 
 # OS
 if [[ -f /etc/os-release ]]; then

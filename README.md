@@ -6,16 +6,31 @@ Repository: https://github.com/apapamarkou/i3-dotfiles-freebsd
 
 ## Features
 
-- i3wm desktop setup
-- Polybar
-- Rofi
-- Dunst
-- Alacritty
-- PipeWire / WirePlumber
-- Zsh setup
-- Nerd Fonts
-- Useful CLI tools
-- Dotfiles bootstrap scripts
+- i3 window manager
+- top bar
+- application launcher
+- emoji picker
+- wallpaper utility
+- neovim full IDE setup 
+- terminal emulator with autosuggestions and ai assistant
+- loopback audio pacthbay (PipeWire / WirePlumber / qpwgraph)
+- weather application
+- disk usage/cleaner
+- system configuration
+- calendar
+- firefox browser
+- VS Code IDE
+- screenshots and screen recording
+- tui file manager (nnn)
+- standard text editors (micro nvim vi)
+- video editing (kdenlive)
+- image editing software (krita and gimp)
+- DAW Music production software (Ardour)
+- pdf view and edit (okular)
+- image quick viewer (feh)
+- windows apps install and run
+- full offlce suite
+
 
 ---
 
@@ -26,6 +41,8 @@ This project is licensed under the GNU General Public License (GPL).
 ---
 
 # Installation
+
+Install freebsd and include `ports`.
 
 ## 1. Login as root
 
@@ -107,7 +124,7 @@ startx
 
 # Notes
 
-* Tested on FreeBSD
+* Tested on FreeBSD 15
 * Uses `.xinitrc` with `startx`
 * Shell is configured to use `zsh`
 * PipeWire and WirePlumber are enabled automatically

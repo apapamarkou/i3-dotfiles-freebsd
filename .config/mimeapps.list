@@ -1,23 +1,23 @@
 [Default Applications]
-x-scheme-handler/http=userapp-Firefox-SIBON3.desktop
-x-scheme-handler/https=userapp-Firefox-SIBON3.desktop
-x-scheme-handler/chrome=userapp-Firefox-SIBON3.desktop
-text/html=userapp-Firefox-SIBON3.desktop
-application/x-extension-htm=userapp-Firefox-SIBON3.desktop
-application/x-extension-html=userapp-Firefox-SIBON3.desktop
-application/x-extension-shtml=userapp-Firefox-SIBON3.desktop
-application/xhtml+xml=userapp-Firefox-SIBON3.desktop
-application/x-extension-xhtml=userapp-Firefox-SIBON3.desktop
-application/x-extension-xht=userapp-Firefox-SIBON3.desktop
+x-scheme-handler/http=userapp-Firefox-M38YP3.desktop
+x-scheme-handler/https=userapp-Firefox-M38YP3.desktop
+x-scheme-handler/chrome=userapp-Firefox-M38YP3.desktop
+text/html=userapp-Firefox-M38YP3.desktop
+application/x-extension-htm=userapp-Firefox-M38YP3.desktop
+application/x-extension-html=userapp-Firefox-M38YP3.desktop
+application/x-extension-shtml=userapp-Firefox-M38YP3.desktop
+application/xhtml+xml=userapp-Firefox-M38YP3.desktop
+application/x-extension-xhtml=userapp-Firefox-M38YP3.desktop
+application/x-extension-xht=userapp-Firefox-M38YP3.desktop
 
 [Added Associations]
-x-scheme-handler/http=userapp-Firefox-SIBON3.desktop;
-x-scheme-handler/https=userapp-Firefox-SIBON3.desktop;
-x-scheme-handler/chrome=userapp-Firefox-SIBON3.desktop;
-text/html=userapp-Firefox-SIBON3.desktop;
-application/x-extension-htm=userapp-Firefox-SIBON3.desktop;
-application/x-extension-html=userapp-Firefox-SIBON3.desktop;
-application/x-extension-shtml=userapp-Firefox-SIBON3.desktop;
-application/xhtml+xml=userapp-Firefox-SIBON3.desktop;
-application/x-extension-xhtml=userapp-Firefox-SIBON3.desktop;
-application/x-extension-xht=userapp-Firefox-SIBON3.desktop;
+x-scheme-handler/http=userapp-Firefox-M38YP3.desktop;userapp-Firefox-SIBON3.desktop;
+x-scheme-handler/https=userapp-Firefox-M38YP3.desktop;userapp-Firefox-SIBON3.desktop;
+x-scheme-handler/chrome=userapp-Firefox-M38YP3.desktop;userapp-Firefox-SIBON3.desktop;
+text/html=userapp-Firefox-SIBON3.desktop;userapp-Firefox-M38YP3.desktop;
+application/x-extension-htm=userapp-Firefox-SIBON3.desktop;userapp-Firefox-M38YP3.desktop;
+application/x-extension-html=userapp-Firefox-SIBON3.desktop;userapp-Firefox-M38YP3.desktop;
+application/x-extension-shtml=userapp-Firefox-SIBON3.desktop;userapp-Firefox-M38YP3.desktop;
+application/xhtml+xml=userapp-Firefox-SIBON3.desktop;userapp-Firefox-M38YP3.desktop;
+application/x-extension-xhtml=userapp-Firefox-SIBON3.desktop;userapp-Firefox-M38YP3.desktop;
+application/x-extension-xht=userapp-Firefox-SIBON3.desktop;userapp-Firefox-M38YP3.desktop;
