@@ -2,7 +2,7 @@
 @import "config.rasi" /* Import your main colors */
 
 window {
-    width:            300px;    /* Much narrower */
+    width:            380px;    /* Much narrower */
     height:           0px;    /* Short and sweet */
     border:           2px;
     border-color:     @blue;

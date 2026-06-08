@@ -32,11 +32,11 @@ echo "Installing packages..."
 
 pkg install -y \
 sudo fzf htop rsync flock ImageMagick7 dejavu noto-basic noto-emoji \
-i3 i3lock i3status dmenu rofi polybar dunst feh arandr xterm \
+i3 i3lock i3status dmenu rofi polybar dunst feh arandr xterm xss-lock \
 bash git curl wget neovim micro ncdu nnn figlet \
 xf86-video-vesa xorg alacritty lxappearance gtk3 dhcpcd \
 firefox python3 xclip autocutsel starship unzip vscode \
-calcurse py311-i3ipc doas qpwgraph maim \
+calcurse py311-i3ipc doas qpwgraph maim redshift \
 pipewire wireplumber pipewire-module-xrdp-0.1 pipewire-spa-oss-g20251117_3 \
 inotify-tools zsh zsh-autosuggestions \
 zsh-completions zsh-fast-syntax-highlighting \

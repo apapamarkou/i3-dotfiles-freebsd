@@ -42,3 +42,4 @@
 .config/mimeapps.list
 Pictures/Wallpapers
 .zshrc
+.local/bin/nightlight

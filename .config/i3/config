@@ -15,8 +15,8 @@ bindsym $mod+q kill
 
 # ----------> Looks
 for_window [class=".*"] border pixel 1
-gaps inner 20
-gaps outer 5
+gaps inner 10
+gaps outer 0
 font pango:Inter 12
 client.focused $color #000000 #ffffff $color $color
 
@@ -32,24 +32,14 @@ bindsym $mod+Shift+r restart
 ## Autostart
 ###############################################
 
-# ----------> network applet <------------------
-# exec --no-startup-id nm-applet
-
 # ----------> Init xterm <----------------------
 exec_always --no-startup-id xrdb -merge ~/.Xresources
-
-# ----------> Enable num lock <-----------------
-
-# exec_always --no-startup-id numlockx on
 
 # ----------> arandr setting <------------------
 exec_always --no-startup-id sh ~/.screenlayout/default.sh
 
 # ----------> notification daemon <-------------
 exec_always --no-startup-id killall -q dunst; dunst
-
-# ----------> autostart applications <----------
-# exec --no-startup-id dex --autostart --environment i3
 
 # ----------> lock screen <---------------------
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- lock-screen
@@ -69,7 +59,6 @@ exec --no-startup-id setxkbmap -layout us,gr -option grp:alt_shift_toggle
 # ----------> Status bar <----------------------
 exec --no-startup-id polybar -r &
 
-# ----------> Load xfsettingsd <----------------
 # exec --no-startup-id xfsettingsd
 
 # ----------> Pipewire patch bay <--------------
@@ -96,12 +85,10 @@ exec_always --no-startup-id wireplumber &
 ## Use pactl to adjust volume in PulseAudio.
 ####################################################
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 
 ####################################
@@ -114,6 +101,8 @@ bindsym $mod+Shift+Return exec $file_manager
 bindsym $mod+d exec --no-startup-id $app_launcher
 bindsym $mod+e exec --no-startup-id $emoji_picker
 bindsym $mod+h exec $display_help
+bindsym $mod+slash exec $display_help
+bindsym F1 exec $display_help
 bindsym $mod+c exec terminal -c BsdConfWindow -l -s 100x30 -e 'sudo bsdconfig'
 # bindsym Print exec --no-startup-id rofi-grab
 
