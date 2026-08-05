@@ -34,7 +34,7 @@ pkg install -y \
 sudo fzf htop rsync flock ImageMagick7 dejavu noto-basic noto-emoji \
 i3 i3lock i3status dmenu rofi polybar dunst feh arandr xterm xss-lock \
 bash git curl wget neovim micro ncdu nnn figlet \
-xf86-video-vesa xorg alacritty lxappearance gtk3 dhcpcd \
+xf86-video-vesa xorg alacritty lxappearance gtk3 dhcpcd lightdm lightdm-gtk-greeter\
 firefox python3 xclip autocutsel starship unzip vscode \
 calcurse py311-i3ipc doas qpwgraph maim redshift \
 pipewire wireplumber pipewire-module-xrdp-0.1 pipewire-spa-oss-g20251117_3 \
@@ -88,13 +88,16 @@ echo 'kern.vty=vt' >> /boot/loader.conf
 echo
 echo "Enabling services..."
 
-sysrc wireplumber_enable="YES"
-sysrc pipewire_enable="YES"
+# ee /etc/rc.conf
+
+#sysrc wireplumber_enable="YES"
+#sysrc pipewire_enable="YES"
 sysrc dhcpcd_enable="YES"
 sysrc dbus_enable="YES"
 sysrc ollama_enable=YES
 sysrc cupsd_enable="YES"
 sysrc devd_enable="YES"
+sysrc lightdm_enable="YES"
 
 echo
 echo "Starting dhcpcd..."
