@@ -17,9 +17,9 @@ if ! id "$TARGET_USER" >/dev/null 2>&1; then
     exit 1
 fi
 
-echo
-echo "Updating package repository..."
-pkg update
+# echo
+# echo "Updating package repository..."
+# pkg update
 
 echo
 echo "Upgrading installed packages..."
@@ -27,8 +27,6 @@ pkg upgrade -y
 
 echo
 echo "Installing packages..."
-
-
 
 pkg install -y \
 sudo fzf htop rsync flock ImageMagick7 dejavu noto-basic noto-emoji \
@@ -38,15 +36,17 @@ xf86-video-vesa xorg alacritty lxappearance gtk3 dhcpcd lightdm lightdm-gtk-gree
 firefox python3 xclip autocutsel starship unzip vscode \
 calcurse doas qpwgraph maim redshift \
 pipewire wireplumber pipewire-module-xrdp-0.1 \
-inotify-tools zsh zsh-autosuggestions \
-zsh-completions zsh-fast-syntax-highlighting \
+inotify-tools zsh \
 papirus-icon-theme materia-gtk-theme \
 ollama python kdenlive krita gimp ardour okular libreoffice wine cabextract \
 cups gutenprint hplip
 
 # py311-i3ipc pipewire-spa-oss-g20251117_3
 
-/usr/local/share/wine/pkg32.sh --old install -r FreeBSD-ports wine mesa-dri
+if [ -x /usr/local/share/wine/pkg32.sh ]; then
+    /usr/local/share/wine/pkg32.sh --old install -r FreeBSD-ports wine mesa-dri
+fi
+
 
 wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
 chmod +x winetricks
@@ -64,7 +64,7 @@ echo "Configuring doas..."
 
 DOAS_FILE="/usr/local/etc/doas.conf"
 
-touch "$DOAS_FILE"
+install -m 0400 /dev/null "$DOAS_FILE"
 
 grep -qxF 'permit nopass :wheel cmd shutdown' "$DOAS_FILE" || \
 echo 'permit nopass :wheel cmd shutdown' >> "$DOAS_FILE"
@@ -84,8 +84,7 @@ sed -i '' \
 echo
 echo "Configuring loader.conf..."
 
-grep -qxF 'kern.vty=vt' /boot/loader.conf || \
-echo 'kern.vty=vt' >> /boot/loader.conf
+sysrc -f /boot/loader.conf kern.vty=vt
 
 echo
 echo "Enabling services..."
@@ -109,7 +108,8 @@ service dhcpcd start || true
 echo
 echo "Starting ollama..."
 
-service ollama start
+service ollama start || true
+service dbus start
 
 echo
 echo "Root setup complete."
