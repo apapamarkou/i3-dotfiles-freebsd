@@ -2,8 +2,13 @@
 
 set -e
 
-sudo pkg install zsh zsh-autosuggestions \
-zsh-completions zsh-fast-syntax-highlighting
+echo "===================================Installing wine mesa-dri"  
+
+if [ -x /usr/local/share/wine/pkg32.sh ]; then
+    /usr/local/share/wine/pkg32.sh --old install -r FreeBSD-ports wine mesa-dri
+fi
+
+
 
 wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
 chmod +x winetricks
