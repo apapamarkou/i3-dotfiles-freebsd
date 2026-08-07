@@ -10,10 +10,10 @@ fi
 
 
 
-wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
-chmod +x winetricks
-./winetricks vcrun6sp6
-rm winetricks
+# wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+# chmod +x winetricks
+# ./winetricks vcrun6sp6
+# rm winetricks
 
 echo "=== FreeBSD User Setup ==="
 
@@ -30,23 +30,30 @@ mkdir -p "$HOME/.local/share/fonts"
 echo
 echo "Installing JetBrainsMono Nerd Font..."
 
+FONT_DIR="$HOME/.local/share/fonts"
+
+mkdir -p "$FONT_DIR"
+
 curl -L \
--o /tmp/JetBrainsMono.zip \
+-o "$FONT_DIR/JetBrainsMono.zip" \
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
 
 unzip -o \
-/tmp/JetBrainsMono.zip \
--d "$HOME/.local/share/fonts"
+"$FONT_DIR/JetBrainsMono.zip" \
+-d "$FONT_DIR"
 
-rm -f /tmp/JetBrainsMono.zip
+rm -f "$FONT_DIR/JetBrainsMono.zip"
 
-git clone --depth 1 https://github.com/rsms/inter.git
-mkdir -p ~/.local/share/fonts
-cp inter/docs/font-files/*.ttf ~/.local/share/fonts/
-rm -rf inter/
+echo
+echo "Installing Inter font..."
 
-fc-cache -f -v
+git clone --depth 1 https://github.com/rsms/inter.git /tmp/inter
 
+cp /tmp/inter/docs/font-files/*.ttf "$FONT_DIR/"
+
+rm -rf /tmp/inter
+
+fc-cache -fv "$FONT_DIR"
 
 echo
 echo "Creating ~/.xinitrc ..."
