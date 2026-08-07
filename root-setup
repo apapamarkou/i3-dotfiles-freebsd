@@ -28,150 +28,18 @@ pkg upgrade -y
 echo
 echo "Installing packages..."
 
-echo "===================================Installing fzf...==================================="
-pkg install -y fzf
-echo "===================================Installing htop...==================================="
-pkg install -y htop
-echo "===================================Installing rsync...==================================="
-pkg install -y rsync
-echo "===================================Installing flock...==================================="
-pkg install -y flock
-echo "===================================Installing ImageMagick7...==================================="
-pkg install -y ImageMagick7
-echo "===================================Installing dejavu...==================================="
-pkg install -y dejavu
-echo "===================================Installing noto-basic...==================================="
-pkg install -y noto-basic
-echo "===================================Installing noto-emoji...==================================="
-pkg install -y noto-emoji
-echo "===================================Installing i3lock...==================================="
-pkg install -y i3lock
-echo "===================================Installing i3status...==================================="
-pkg install -y i3status
-echo "===================================Installing dmenu...==================================="
-pkg install -y dmenu
-echo "===================================Installing rofi...==================================="
-pkg install -y rofi
-echo "===================================Installing polybar...==================================="
-pkg install -y polybar
-echo "===================================Installing dunst...==================================="
-pkg install -y dunst
-echo "===================================Installing feh...==================================="
-pkg install -y feh
-echo "===================================Installing arandr...==================================="
-pkg install -y arandr
-echo "===================================Installing xterm...==================================="
-pkg install -y xterm
-echo "===================================Installing xss-lock...==================================="
-pkg install -y xss-lock
-echo "===================================Installing git...==================================="
-pkg install -y git
-echo "===================================Installing curl...==================================="
-pkg install -y curl
-echo "===================================Installing wget...==================================="
-pkg install -y wget
-echo "===================================Installing neovim...==================================="
-pkg install -y neovim
-echo "===================================Installing micro...==================================="
-pkg install -y micro
-echo "===================================Installing ncdu...==================================="
-pkg install -y ncdu
-echo "===================================Installing nnn...==================================="
-pkg install -y nnn
-echo "===================================Installing figlet...==================================="
-pkg install -y figlet
-echo "===================================Installing xorg...==================================="
-pkg install -y xorg
-echo "===================================Installing alacritty...==================================="
-pkg install -y alacritty
-echo "===================================Installing lxappearance...==================================="
-pkg install -y lxappearance
-echo "===================================Installing gtk3...==================================="
-pkg install -y gtk3
-echo "===================================Installing dhcpcd...==================================="
-pkg install -y dhcpcd
-echo "===================================Installing lightdm...==================================="
-pkg install -y lightdm
-echo "===================================Installing lightdm-gtk-greeter...==================================="
-pkg install -y lightdm-gtk-greeter
-echo "===================================Installing python3...==================================="
-pkg install -y python3
-echo "===================================Installing sudo...==================================="
-pkg install -y sudo
-echo "===================================Installing i3...==================================="
-pkg install -y i3
-echo "===================================Installing bash...==================================="
-pkg install -y bash
-echo "===================================Installing xf86-video-vesa...==================================="
-pkg install -y xf86-video-vesa
-echo "===================================Installing xclip...==================================="
-pkg install -y xclip
-echo "===================================Installing autocutsel...==================================="
-pkg install -y autocutsel
-echo "===================================Installing starship...==================================="
-pkg install -y starship
-echo "===================================Installing unzip...==================================="
-pkg install -y unzip
-echo "===================================Installing vscode...==================================="
-pkg install -y vscode
-echo "===================================Installing doas...==================================="
-pkg install -y doas
-echo "===================================Installing firefox...==================================="
-pkg install -y firefox
-echo "===================================Installing calcurse...==================================="
-pkg install -y calcurse
-echo "===================================Installing qpwgraph...==================================="
-pkg install -y qpwgraph
-echo "===================================Installing maim...==================================="
-pkg install -y maim
-echo "===================================Installing redshift...==================================="
-pkg install -y redshift
-echo "===================================Installing wireplumber...==================================="
-pkg install -y wireplumber
-echo "===================================Installing pipewire...==================================="
-pkg install -y pipewire
-echo "===================================Installing pipewire-module-xrdp-0.1...==================================="
-pkg install -y pipewire-module-xrdp-0.1
-echo "===================================Installing inotify-tools...==================================="
-pkg install -y inotify-tools
-echo "===================================Installing papirus-icon-theme...==================================="
-pkg install -y papirus-icon-theme
-echo "===================================Installing materia-gtk-theme...==================================="
-pkg install -y materia-gtk-theme
-echo "===================================Installing ollama...==================================="
-pkg install -y ollama
-echo "===================================Installing python...==================================="
-pkg install -y python
-echo "===================================Installing kdenlive...==================================="
-pkg install -y kdenlive
-echo "===================================Installing krita...==================================="
-pkg install -y krita
-echo "===================================Installing gimp...==================================="
-pkg install -y gimp
-echo "===================================Installing ardour...==================================="
-pkg install -y ardour
-echo "===================================Installing okular...==================================="
-pkg install -y okular
-echo "===================================Installing libreoffice...==================================="
-pkg install -y libreoffice
-echo "===================================Installing wine...==================================="
-pkg install -y wine
-echo "===================================Installing cabextract...==================================="
-pkg install -y cabextract
-echo "===================================Installing cups...==================================="
-pkg install -y cups
-echo "===================================Installing gutenprint...==================================="
-pkg install -y gutenprint
-echo "===================================Installing hplip...==================================="
-pkg install -y hplip
-echo "===================================Installing zsh...==================================="
-pkg install -y zsh
-echo "===================================Installing zsh-autosuggestions...==================================="
-pkg install -y zsh-autosuggestions
-echo "===================================Installing zsh-fast-syntax-highlighting...==================================="
-pkg install -y zsh-fast-syntax-highlighting
-echo "===================================Installing zsh-completions...==================================="
-pkg install -y zsh-completions
+pkg install -y fzf htop rsync flock ImageMagick7 \
+dejavu noto-basic noto-emoji i3lock i3status dmenu \
+rofi polybar dunst feh arandr xterm xss-lock git \
+curl wget neovim micro ncdu nnn figlet xorg alacritty \
+lxappearance gtk3 dhcpcd lightdm lightdm-gtk-greeter \
+python3 sudo i3 bash xf86-video-vesa xclip autocutsel \
+starship unzip vscode doas firefox calcurse qpwgraph maim \
+redshift wireplumber pipewire pipewire-module-xrdp-0.1 \
+inotify-tools papirus-icon-theme materia-gtk-theme ollama \
+python kdenlive krita gimp ardour okular libreoffice wine \
+cabextract cups gutenprint hplip zsh zsh-autosuggestions \
+zsh-fast-syntax-highlighting zsh-completions
 
 # py311-i3ipc pipewire-spa-oss-g20251117_3
 
@@ -206,7 +74,8 @@ sed -i '' \
 echo
 echo "Configuring loader.conf..."
 
-sysrc -f /boot/loader.conf kern.vty=vt
+grep -qxF 'kern.vty=vt' /boot/loader.conf || \
+echo 'kern.vty=vt' >> /boot/loader.conf
 
 echo
 echo "Enabling services..."
