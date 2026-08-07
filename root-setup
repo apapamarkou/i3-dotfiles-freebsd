@@ -36,7 +36,8 @@ xf86-video-vesa xorg alacritty lxappearance gtk3 dhcpcd lightdm lightdm-gtk-gree
 firefox python3 xclip autocutsel starship unzip vscode \
 calcurse doas qpwgraph maim redshift \
 pipewire wireplumber pipewire-module-xrdp-0.1 \
-inotify-tools zsh \
+inotify-tools zsh zsh-autosuggestions \
+zsh-completions zsh-fast-syntax-highlighting \
 papirus-icon-theme materia-gtk-theme \
 ollama python kdenlive krita gimp ardour okular libreoffice wine cabextract \
 cups gutenprint hplip
@@ -48,10 +49,7 @@ if [ -x /usr/local/share/wine/pkg32.sh ]; then
 fi
 
 
-wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
-chmod +x winetricks
-./winetricks vcrun6sp6
-rm winetricks
+
 
 echo
 echo "Adding user to groups..."
