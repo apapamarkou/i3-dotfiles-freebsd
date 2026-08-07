@@ -28,18 +28,143 @@ pkg upgrade -y
 echo
 echo "Installing packages..."
 
-pkg install -y \
-sudo fzf htop rsync flock ImageMagick7 dejavu noto-basic noto-emoji \
-i3 i3lock i3status dmenu rofi polybar dunst feh arandr xterm xss-lock \
-bash git curl wget neovim micro ncdu nnn figlet \
-xf86-video-vesa xorg alacritty lxappearance gtk3 dhcpcd lightdm lightdm-gtk-greeter \
-firefox python3 xclip autocutsel starship unzip vscode \
-calcurse doas qpwgraph maim redshift \
-pipewire wireplumber pipewire-module-xrdp-0.1 \
-inotify-tools \
-papirus-icon-theme materia-gtk-theme \
-ollama python kdenlive krita gimp ardour okular libreoffice wine cabextract \
-cups gutenprint hplip
+echo "\n\n===================================\nInstalling fzf...\n===================================\n"
+pkg install -y fzf
+echo "\n\n===================================\nInstalling htop...\n===================================\n"
+pkg install -y htop
+echo "\n\n===================================\nInstalling rsync...\n===================================\n"
+pkg install -y rsync
+echo "\n\n===================================\nInstalling flock...\n===================================\n"
+pkg install -y flock
+echo "\n\n===================================\nInstalling ImageMagick7...\n===================================\n"
+pkg install -y ImageMagick7
+echo "\n\n===================================\nInstalling dejavu...\n===================================\n"
+pkg install -y dejavu
+echo "\n\n===================================\nInstalling noto-basic...\n===================================\n"
+pkg install -y noto-basic
+echo "\n\n===================================\nInstalling noto-emoji...\n===================================\n"
+pkg install -y noto-emoji
+echo "\n\n===================================\nInstalling i3lock...\n===================================\n"
+pkg install -y i3lock
+echo "\n\n===================================\nInstalling i3status...\n===================================\n"
+pkg install -y i3status
+echo "\n\n===================================\nInstalling dmenu...\n===================================\n"
+pkg install -y dmenu
+echo "\n\n===================================\nInstalling rofi...\n===================================\n"
+pkg install -y rofi
+echo "\n\n===================================\nInstalling polybar...\n===================================\n"
+pkg install -y polybar
+echo "\n\n===================================\nInstalling dunst...\n===================================\n"
+pkg install -y dunst
+echo "\n\n===================================\nInstalling feh...\n===================================\n"
+pkg install -y feh
+echo "\n\n===================================\nInstalling arandr...\n===================================\n"
+pkg install -y arandr
+echo "\n\n===================================\nInstalling xterm...\n===================================\n"
+pkg install -y xterm
+echo "\n\n===================================\nInstalling xss-lock...\n===================================\n"
+pkg install -y xss-lock
+echo "\n\n===================================\nInstalling git...\n===================================\n"
+pkg install -y git
+echo "\n\n===================================\nInstalling curl...\n===================================\n"
+pkg install -y curl
+echo "\n\n===================================\nInstalling wget...\n===================================\n"
+pkg install -y wget
+echo "\n\n===================================\nInstalling neovim...\n===================================\n"
+pkg install -y neovim
+echo "\n\n===================================\nInstalling micro...\n===================================\n"
+pkg install -y micro
+echo "\n\n===================================\nInstalling ncdu...\n===================================\n"
+pkg install -y ncdu
+echo "\n\n===================================\nInstalling nnn...\n===================================\n"
+pkg install -y nnn
+echo "\n\n===================================\nInstalling figlet...\n===================================\n"
+pkg install -y figlet
+echo "\n\n===================================\nInstalling xorg...\n===================================\n"
+pkg install -y xorg
+echo "\n\n===================================\nInstalling alacritty...\n===================================\n"
+pkg install -y alacritty
+echo "\n\n===================================\nInstalling lxappearance...\n===================================\n"
+pkg install -y lxappearance
+echo "\n\n===================================\nInstalling gtk3...\n===================================\n"
+pkg install -y gtk3
+echo "\n\n===================================\nInstalling dhcpcd...\n===================================\n"
+pkg install -y dhcpcd
+echo "\n\n===================================\nInstalling lightdm...\n===================================\n"
+pkg install -y lightdm
+echo "\n\n===================================\nInstalling lightdm-gtk-greeter...\n===================================\n"
+pkg install -y lightdm-gtk-greeter
+echo "\n\n===================================\nInstalling python3...\n===================================\n"
+pkg install -y python3
+echo "\n\n===================================\nInstalling sudo...\n===================================\n"
+pkg install -y sudo
+echo "\n\n===================================\nInstalling i3...\n===================================\n"
+pkg install -y i3
+echo "\n\n===================================\nInstalling bash...\n===================================\n"
+pkg install -y bash
+echo "\n\n===================================\nInstalling xf86-video-vesa...\n===================================\n"
+pkg install -y xf86-video-vesa
+echo "\n\n===================================\nInstalling xclip...\n===================================\n"
+pkg install -y xclip
+echo "\n\n===================================\nInstalling autocutsel...\n===================================\n"
+pkg install -y autocutsel
+echo "\n\n===================================\nInstalling starship...\n===================================\n"
+pkg install -y starship
+echo "\n\n===================================\nInstalling unzip...\n===================================\n"
+pkg install -y unzip
+echo "\n\n===================================\nInstalling vscode...\n===================================\n"
+pkg install -y vscode
+echo "\n\n===================================\nInstalling doas...\n===================================\n"
+pkg install -y doas
+echo "\n\n===================================\nInstalling firefox...\n===================================\n"
+pkg install -y firefox
+echo "\n\n===================================\nInstalling calcurse...\n===================================\n"
+pkg install -y calcurse
+echo "\n\n===================================\nInstalling qpwgraph...\n===================================\n"
+pkg install -y qpwgraph
+echo "\n\n===================================\nInstalling maim...\n===================================\n"
+pkg install -y maim
+echo "\n\n===================================\nInstalling redshift...\n===================================\n"
+pkg install -y redshift
+echo "\n\n===================================\nInstalling wireplumber...\n===================================\n"
+pkg install -y wireplumber
+echo "\n\n===================================\nInstalling pipewire...\n===================================\n"
+pkg install -y pipewire
+echo "\n\n===================================\nInstalling pipewire-module-xrdp-0.1...\n===================================\n"
+pkg install -y pipewire-module-xrdp-0.1
+echo "\n\n===================================\nInstalling inotify-tools...\n===================================\n"
+pkg install -y inotify-tools
+echo "\n\n===================================\nInstalling papirus-icon-theme...\n===================================\n"
+pkg install -y papirus-icon-theme
+echo "\n\n===================================\nInstalling materia-gtk-theme...\n===================================\n"
+pkg install -y materia-gtk-theme
+echo "\n\n===================================\nInstalling ollama...\n===================================\n"
+pkg install -y ollama
+echo "\n\n===================================\nInstalling python...\n===================================\n"
+pkg install -y python
+echo "\n\n===================================\nInstalling kdenlive...\n===================================\n"
+pkg install -y kdenlive
+echo "\n\n===================================\nInstalling krita...\n===================================\n"
+pkg install -y krita
+echo "\n\n===================================\nInstalling gimp...\n===================================\n"
+pkg install -y gimp
+echo "\n\n===================================\nInstalling ardour...\n===================================\n"
+pkg install -y ardour
+echo "\n\n===================================\nInstalling okular...\n===================================\n"
+pkg install -y okular
+echo "\n\n===================================\nInstalling libreoffice...\n===================================\n"
+pkg install -y libreoffice
+echo "\n\n===================================\nInstalling wine...\n===================================\n"
+pkg install -y wine
+echo "\n\n===================================\nInstalling cabextract...\n===================================\n"
+pkg install -y cabextract
+echo "\n\n===================================\nInstalling cups...\n===================================\n"
+pkg install -y cups
+echo "\n\n===================================\nInstalling gutenprint...\n===================================\n"
+pkg install -y gutenprint
+echo "\n\n===================================\nInstalling hplip...\n===================================\n"
+pkg install -y hplip
+echo "\n\n===================================\nInstalling wine mesa-dri"  
 
 # py311-i3ipc pipewire-spa-oss-g20251117_3
 
